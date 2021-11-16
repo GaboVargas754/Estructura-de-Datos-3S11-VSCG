@@ -3,7 +3,6 @@ package lista_v12;
 import java.util.Scanner;
 
 public class EstNodo {
-
     Scanner sc = new Scanner(System.in);
 
     private static class Nodo { //estructura del nodo
@@ -18,10 +17,40 @@ public class EstNodo {
     public void add_inicial() { //metodo para nodo inicial
         if (top==null){
             top = new Nodo ();
-            System.out.print("Ingresa un dato: ");
-            top.name = sc.nextLine();
-            top.next = null;
-            System.out.println("Dato agregado");
+            System.out.println("Generar automaticamente\n1. si\n2. no");
+            int si = sc.nextInt();
+            if(si==1){
+                String palabra="";
+            char uno=0,dos=0,tres=0,cuatro=0,cinco=0;
+            while(uno==0||uno<65||uno>90){
+                uno=(char)(Math.random()*91);
+            }
+            while(dos==0||dos<48||dos>57&&dos<65||dos>90&&dos<97||dos>122){
+                dos=(char)(Math.random()*150);
+            }
+            while(tres==0||tres<48||tres>57&&tres<65||tres>90&&tres<97||tres>122){
+                tres=(char)(Math.random()*150);
+            }
+            while(cuatro==0||cuatro<48||cuatro>57&&cuatro<65||cuatro>90&&cuatro<97||cuatro>122){
+                cuatro=(char)(Math.random()*150);
+            }
+            while(cinco==0||cinco<33||cinco>47&&cinco<58||cinco>64){
+                cinco=(char)(Math.random()*65);
+            }
+            palabra+=uno;
+            palabra+=dos;
+            palabra+=tres;
+            palabra+=cuatro;
+            palabra+=cinco;
+            top.name = palabra;
+                top.next = null;
+                System.out.println("Dato agregado");
+            } else{
+                System.out.print("Ingresa un dato: ");
+                top.name = sc.nextLine();
+                top.next = null;
+                System.out.println("Dato agregado");
+            }
         } else{
             System.out.println("Ya existe nodo inicial");
         }
