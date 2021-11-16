@@ -13,6 +13,7 @@ public class EstNodo {
     }
     Nodo top = null;
     Nodo temp = null;
+    Nodo anterior = null;
 
     public void add_inicial() { //metodo para nodo inicial
         if (top==null){
@@ -30,6 +31,7 @@ public class EstNodo {
         if(top==null){
             System.out.println("No existe nodo inicial");
         } else{
+            anterior = top;
             Nodo temp;
 
             temp = new Nodo ();
@@ -45,6 +47,7 @@ public class EstNodo {
         if(top==null){
             System.out.println("No existe nodo inicial");
         } else{
+            
             temp = new Nodo ();
             System.out.print("Ingresa un dato: ");
             temp.name = sc.nextLine();
@@ -53,7 +56,7 @@ public class EstNodo {
             Nodo temp2;
 
             temp2 = top;
-
+            anterior = top;
             while (temp2.next != null)
                temp2 = temp2.next;
 
@@ -66,6 +69,7 @@ public class EstNodo {
         if(top==null){
             System.out.println("No existe nodo inicial");
         } else{
+            anterior = top;
             temp = new Nodo ();
             System.out.print("Ingresa un dato: ");
             temp.name = sc.nextLine();
@@ -107,6 +111,16 @@ public class EstNodo {
                     System.out.println("Dato ["+topNodo.name+"]");
                     topNodo = topNodo.next;
                 }
+        }
+    }
+        
+    public void delete(){ //MÉTODO BORRAR 
+        System.out.println("Dato eliminado...");
+        if(top.next==null){ //si tope.next es null, es porque solo hay un nodo
+            top = null; //dejamos tope null y así borramos el único nodo
+        } else{ //si tope.next NO es null, hay dos o más nodos
+            top=anterior; //tope pasará a ser el nodo anterior a él
+            anterior=anterior.next; //anterior pasa a ser el nodo anterior al dato que tenía
         }
     }
 }
