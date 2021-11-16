@@ -152,4 +152,28 @@ public class EstNodo {
             anterior=anterior.next; //anterior pasa a ser el nodo anterior al dato que tenía
         }
     }
+    
+    public void search(){
+        Nodo buscar = new Nodo();
+        buscar =top;
+        int cont=0;
+        String valor;
+        boolean encontrado=false;
+        System.out.print("Ingrese el valor a buscar: ");
+        valor = sc.nextLine();
+        if(buscar==null){
+            System.out.println("La lista está vacía");
+        } else{
+            while(buscar!=null && encontrado!=true){
+                cont++;
+                if(valor.equals(buscar.name)){
+                    encontrado=true;
+                    System.out.println("Valor encontrado en la posición "+cont);
+                } else{
+                    System.out.println("No se encontró el elemento");
+                }
+                buscar=buscar.next;
+            }
+        }
+    }
 }
