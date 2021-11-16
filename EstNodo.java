@@ -1,56 +1,112 @@
-package nodoos;
+package lista_v12;
+
 import java.util.Scanner;
 
 public class EstNodo {
+
     Scanner sc = new Scanner(System.in);
-    
-    //creamos la estructura del nodo
-    static class Nodo{
-        String dato;
+
+    private static class Nodo { //estructura del nodo
+
+        String name;
         Nodo next;
     }
-    
-    Nodo tope=null; //en el nodo tope se irán almacenando los nodos anteriores
-    Nodo anterior=null; //en este nodo se almacenará el nodo anterior al tope
-                        //en caso de estar null es porque solo hay un nodo o no hay ningún nodo 
-    Nodo temp; //este nodo nos permitirá ir agregando nodos
-    
-    public void add(){ //MÉTODO AGREGAR
-        System.out.print("Ingresa dato: ");
-        if(tope==null){ //si el tope está null es porque este será el primer nodo
-            tope = new Nodo(); 
-            tope.dato = sc.nextLine(); 
-            tope.next = null; //indicamos que después de éste, no hay otro nodo
-        } else{ //si el tope NO es null, es porque ya hay uno o más nodos
-            anterior=tope; //almacenamos el nodo tope como el anterior ya que se va a ingresar
-                           //un nuevo nodo
-            temp = new Nodo();
-            temp.dato = sc.nextLine();
-            temp.next = tope;
-            tope = temp; //indicamos que el nodo tope ahora será el nodo temporal
+    Nodo top = null;
+    Nodo temp = null;
+
+    public void add_inicial() { //metodo para nodo inicial
+        if (top==null){
+            top = new Nodo ();
+            System.out.print("Ingresa un dato: ");
+            top.name = sc.nextLine();
+            top.next = null;
+            System.out.println("Dato agregado");
+        } else{
+            System.out.println("Ya existe nodo inicial");
         }
     }
     
-    public void show(){ //MÉTODO MOSTRAR
-        Nodo show = new Nodo(); //creamos un nodo que nos ayude a mostrar el contenido
-        show = tope; //el nodo show tomará el valor de tope (así no afectamos a tope)
-        if(show==null){ //si show es null, es porque no hay ningún dato
-            System.out.println("No hay ningun nodo");
-        } else { //si show NO es null es porque si hay nodos
-            while(show!=null){ //mientras show sea diferente de null
-                System.out.println("DATO-> "+show.dato); //mostrará el contenido de show
-                show = show.next; //y este irá pasando al siguiente nodo, así hasta llegar al final
+    public void back(){ //metodo para nodo antes de inicio
+        if(top==null){
+            System.out.println("No existe nodo inicial");
+        } else{
+            Nodo temp;
+
+            temp = new Nodo ();
+            System.out.print("Ingresa un dato: ");
+            temp.name = sc.nextLine();
+            temp.next = top;
+            top = temp;
+            System.out.println("Dato agregado");
+        }
+    }
+    
+    public void next(){ //metodo para nodo despues de inicio
+        if(top==null){
+            System.out.println("No existe nodo inicial");
+        } else{
+            temp = new Nodo ();
+            System.out.print("Ingresa un dato: ");
+            temp.name = sc.nextLine();
+            temp.next = null;
+
+            Nodo temp2;
+
+            temp2 = top;
+
+            while (temp2.next != null)
+               temp2 = temp2.next;
+
+            temp2.next = temp;
+            System.out.println("Dato agregado");
+        }
+    }
+    
+    public void inter(){ //metodo para agregar nodo despues de otro en especifico
+        if(top==null){
+            System.out.println("No existe nodo inicial");
+        } else{
+            temp = new Nodo ();
+            System.out.print("Ingresa un dato: ");
+            temp.name = sc.nextLine();
+
+            Nodo temp2 = top;
+            System.out.print("Ingresa el dato anterior de donde se guardara el nodo: ");
+            String dato = sc.nextLine();
+            
+            Nodo buscar = new Nodo();
+            buscar =top;
+            boolean encontrado=false;
+            while(buscar!=null && encontrado!=true){
+                if(dato.equals(buscar.name)){
+                    encontrado=true;
+                }
+                buscar=buscar.next;
+            }
+            if(encontrado==true){
+                while (temp2.name.equals (dato) == false){
+                    temp2 = temp2.next;
+                }
+
+                temp.next = temp2.next;
+                temp2.next = temp; 
+                System.out.println("Dato agregado");
+            } else{
+                System.out.println("No existe nodo con ese dato");
             }
         }
     }
     
-    public void delete(){ //MÉTODO BORRAR
-        System.out.println("Dato eliminado...");
-        if(tope.next==null){ //si tope.next es null, es porque solo hay un nodo
-            tope = null; //dejamos tope null y así borramos el único nodo
-        } else{ //si tope.next NO es null, hay dos o más nodos
-            tope=anterior; //tope pasará a ser el nodo anterior a él
-            anterior=anterior.next; //anterior pasa a ser el nodo anterior al dato que tenía
+    public void show(){ // metodo para mostrar nodos
+        System.out.println();
+        Nodo topNodo = top;
+        if(topNodo==null){
+            System.out.println("No hay nodos para mostrar");
+        } else{
+                while (topNodo != null) {
+                    System.out.println("Dato ["+topNodo.name+"]");
+                    topNodo = topNodo.next;
+                }
         }
     }
 }
