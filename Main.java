@@ -1,24 +1,31 @@
-package ejercicio06092021;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        
-        //Pedimos los datos al usuario
-        System.out.print("Ingresa el tamaño de la matriz y vector: ");
-        int tam = in.nextInt();
-        
-        System.err.println("Ejercicio 1");
-        //instanciamos la clase Main con la subclase Matriz 
-        Matriz mt = new Matriz(tam);
-        mt.matriz();//traemos el método matriz de la clase Matriz
-        
-        System.err.println("\n--------------------------\n"
-                + "Ejercicio 2");
-        //instanciamos la clase Main con la subclase Vector
-        Vector vt = new Vector(tam);
-        vt.vector();//traemos el método vector de la clase Vector
-        
+        Scanner sc = new Scanner(System.in);
+        EstNodo en = new EstNodo();
+        String opc;
+        JOptionPane.showMessageDialog(null, "Vargas Salas Christian Gabriel\n"
+                + "Para que no de error primero ordenar nodos y"
+                + " luego eliminar los nodos", "500 Nodos numericos", JOptionPane.INFORMATION_MESSAGE);
+        do{
+            System.out.print("\n1. agregar\n2. ordenar\n"
+                    + "3. eliminar repetidos\n4. mostrar\n5. salir\n: ");
+            switch(opc = sc.nextLine()){
+                case "1":
+                    en.add();
+                    break;
+                case "3":
+                    en.delete();
+                    break;
+                case "2":
+                    en.ordenar();
+                    break;
+                case "4":
+                    en.show();
+                    break;
+            }
+        }while(!opc.equals("5"));
     }
 }
